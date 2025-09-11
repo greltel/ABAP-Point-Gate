@@ -1,0 +1,82 @@
+{
+  "global": {
+    "files": "/src/**/*.*"
+  },
+  "dependencies": [
+    {
+      "url": "https://github.com/abaplint/deps",
+      "folder": "/deps",
+      "files": "/src/**/*.*"
+    }
+  ],
+  "syntax": {
+    "version": "v702",
+    "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_)"
+  },
+  "rules": {
+    "exporting": true,
+    "local_class_naming": {
+      "exclude": [],
+      "severity": "Error",
+      "patternKind": "required",
+      "ignoreNames": [],
+      "ignorePatterns": [],
+      "local": "^L.+$",
+      "exception": "^LCX_.+$",
+      "test": "^L.+$"
+    },
+    "method_parameter_names": {
+      "exclude": [],
+      "severity": "Error",
+      "patternKind": "required",
+      "ignoreNames": [],
+      "ignorePatterns": [],
+      "ignoreExceptions": true,
+      "importing": "^I._.+$",
+      "returning": "^R._.+$",
+      "changing": "^C._.+$",
+      "exporting": "^E._.+$"
+    },
+    "object_naming": {
+      "exclude": [],
+      "severity": "Error",
+      "patternKind": "required",
+      "ignoreNames": [],
+      "ignorePatterns": [],
+      "clas": "^ZC(L|X)",
+      "intf": "^ZIF",
+      "prog": "^Z",
+      "fugr": "^Z",
+      "tabl": "^Z",
+      "ttyp": "^Z",
+      "dtel": "^Z",
+      "doma": "^Z",
+      "msag": "^Z",
+      "tran": "^Z",
+      "enqu": "^EZ",
+      "auth": "^Z",
+      "pinf": "^Z",
+      "idoc": "^Z",
+      "xslt": "^Z",
+      "ssfo": "^Z",
+      "ssst": "^Z",
+      "shlp": "^Z"
+    },
+    "selection_screen_naming": {
+      "exclude": [],
+      "severity": "Error",
+      "patternKind": "required",
+      "ignoreNames": [],
+      "ignorePatterns": [],
+      "parameter": "^P_.+$",
+      "selectOption": "^S_.+$",
+      "screenElement": "^SC_.+$"
+    },
+    "types_naming": {
+      "exclude": [],
+      "severity": "Error",
+      "pattern": "^T.+$"
+    },
+    "unused_variables": true
+  }
+}
