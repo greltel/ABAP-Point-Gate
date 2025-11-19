@@ -12,7 +12,7 @@ INTERFACE zif_apg_context
       EXPORTING
         e_value TYPE REF TO data
       RAISING
-        cx_sy_itab_line_not_found, "or custom ZCX_APG_ERROR
+        zcx_apg_error,
     has_data
       IMPORTING
         i_name       TYPE string

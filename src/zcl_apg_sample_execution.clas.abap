@@ -37,8 +37,8 @@ CLASS ZCL_APG_SAMPLE_EXECUTION IMPLEMENTATION.
     "Example Change Data
     ls_bkpf-budat = syst-datum.
     lr_data->*    = ls_bkpf.
-    io_context->set_data( EXPORTING i_name  = 'BKPF'
-                                    i_value = lr_data ).
+    io_context->set_data( i_name  = 'BKPF'
+                          i_value = lr_data ).
 
   ENDMETHOD.
 ENDCLASS.
