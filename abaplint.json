@@ -32,7 +32,7 @@
       "ignoreNames": [],
       "ignorePatterns": [],
       "ignoreExceptions": true,
-      "importing": "^I._.+$",
+      "importing": "^[Ii]._.+$",
       "returning": "^R._.+$",
       "changing": "^C._.+$",
       "exporting": "^E._.+$"
