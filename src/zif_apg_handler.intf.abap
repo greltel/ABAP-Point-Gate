@@ -6,7 +6,7 @@ interface ZIF_APG_HANDLER
 *        zcx_apg_error
   methods EXECUTE
     importing
-      !IO_CONTEXT type ref to ZIF_APG_CONTEXT
+      !I_CONTEXT type ref to ZIF_APG_CONTEXT
     changing
       !CO_MESSAGE_CONTAINER type BAPIRET2_T              "or custom message handler
     raising

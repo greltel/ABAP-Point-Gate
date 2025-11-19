@@ -17,7 +17,7 @@ lo_context->set_data( i_name = 'BKPF' i_value = lr_bkpf ).
 TRY.
     DATA lt_msg_cont TYPE bapiret2_t.
     zcl_apg_execution=>execute_gate( EXPORTING i_point_id = 'SAMPLE_SAVE_BEFORE'
-                                               io_context = lo_context
+                                               i_context = lo_context
                                      CHANGING co_message_container = lt_msg_cont ).
 
     "Now we can read the message container for validations
