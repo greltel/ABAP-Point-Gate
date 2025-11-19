@@ -33,9 +33,9 @@
       "ignorePatterns": [],
       "ignoreExceptions": true,
       "importing": "^[Ii]_.+$",
-      "returning": "^R._.+$",
+      "returning": "^[Rr]_.+$",
       "changing": "^C._.+$",
-      "exporting": "^E._.+$"
+      "exporting": "^[Ee]_.+$"
     },
     "object_naming": {
       "exclude": [],
