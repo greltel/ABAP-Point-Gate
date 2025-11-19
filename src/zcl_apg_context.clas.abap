@@ -1,9 +1,18 @@
-CLASS zcl_apg_context DEFINITION
-PUBLIC
-FINAL
-CREATE PUBLIC.
-  PUBLIC SECTION.
-    INTERFACES zif_apg_context.
+class ZCL_APG_CONTEXT definition
+  public
+  final
+  create public .
+
+public section.
+
+  interfaces ZIF_APG_CONTEXT .
+
+  aliases GET_DATA
+    for ZIF_APG_CONTEXT~GET_DATA .
+  aliases HAS_DATA
+    for ZIF_APG_CONTEXT~HAS_DATA .
+  aliases SET_DATA
+    for ZIF_APG_CONTEXT~SET_DATA .
   PRIVATE SECTION.
     TYPES:
       BEGIN OF ty_pair,
@@ -20,26 +29,24 @@ CLASS ZCL_APG_CONTEXT IMPLEMENTATION.
 
 
   METHOD zif_apg_context~get_data.
-    READ TABLE mt_data INTO DATA(ls_pair)
-    WITH KEY name = i_name.
-    IF sy-subrc <> 0.
-      RAISE EXCEPTION TYPE cx_sy_itab_line_not_found.
-    ENDIF.
-    e_value = ls_pair-value.
+
+    e_value = VALUE #( mt_data[ name = i_name ]-value OPTIONAL ).
+
   ENDMETHOD.
 
 
   METHOD zif_apg_context~has_data.
+
     READ TABLE mt_data WITH KEY name = i_name TRANSPORTING NO FIELDS.
-    r_has = xsdbool( sy-subrc = 0 ).
+    r_has = xsdbool( syst-subrc IS INITIAL ).
+
   ENDMETHOD.
 
 
   METHOD zif_apg_context~set_data.
-    DATA(ls_pair) = VALUE ty_pair(
-    name = i_name
-    value = i_value ).
+
     DELETE mt_data WHERE name = i_name.
-    INSERT ls_pair INTO TABLE mt_data.
+    INSERT VALUE ty_pair( name = i_name value = i_value ) INTO TABLE mt_data.
+
   ENDMETHOD.
 ENDCLASS.

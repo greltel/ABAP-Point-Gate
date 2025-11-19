@@ -5,26 +5,29 @@
 *&---------------------------------------------------------------------*
 REPORT zabap_point_gate_sample.
 
-TABLES vbak.
+"Create Context Object and Give Data
+SELECT SINGLE FROM bkpf
+  FIELDS *
+  INTO NEW @DATA(lr_bkpf).
 
 DATA(lo_context) = NEW zcl_apg_context( ).
-DATA lr_vbak TYPE REF TO vbak.
-DATA lo_msg_cont TYPE REF TO if_t100_message.
-" Create data reference and assign current VBAK structure
-CREATE DATA lr_vbak.
-lr_vbak->* = vbak.
-" Put VBAK into context under key 'VBAK'
-lo_context->zif_apg_context~set_data(
-i_name = 'VBAK'
-i_value = lr_vbak ).
-" Call the gate before saving the sales order
+lo_context->set_data( i_name = 'BKPF' i_value = lr_bkpf ).
+
+"Call the gate
 TRY.
-    zcl_apg_execution=>execute_gate(
-    EXPORTING
-    i_point_id = 'SALES_SAVE_BEFORE'
-    io_context = lo_context
-    CHANGING
-    co_message_container = lo_msg_cont ).
+    DATA lt_msg_cont TYPE bapiret2_t.
+    zcl_apg_execution=>execute_gate( EXPORTING i_point_id = 'SAMPLE_SAVE_BEFORE'
+                                               io_context = lo_context
+                                     CHANGING co_message_container = lt_msg_cont ).
+
+    "Now we can read the message container for validations
+
+    "Or take the new data back
+    lo_context->get_data( EXPORTING i_name = 'BKPF' IMPORTING e_value = DATA(lr_changed_bkpf) ).
+
+    BREAK-POINT.
+
   CATCH zcx_apg_error INTO DATA(lx_apg).
     " Error handling: logging, rollback, user message etc.
+    BREAK-POINT.
 ENDTRY.

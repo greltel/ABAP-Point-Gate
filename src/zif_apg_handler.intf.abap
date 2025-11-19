@@ -1,14 +1,14 @@
-INTERFACE zif_apg_handler
-  PUBLIC .
+interface ZIF_APG_HANDLER
+  public .
 
-  METHODS:
-    execute
-      IMPORTING
-        io_context           TYPE REF TO zif_apg_context
-      CHANGING
-        co_message_container TYPE REF TO if_t100_message "or custom message handler
+
 *      RAISING
 *        zcx_apg_error
-        .
-
-ENDINTERFACE.
+  methods EXECUTE
+    importing
+      !IO_CONTEXT type ref to ZIF_APG_CONTEXT
+    changing
+      !CO_MESSAGE_CONTAINER type BAPIRET2_T              "or custom message handler
+    raising
+      ZCX_APG_ERROR .
+endinterface.

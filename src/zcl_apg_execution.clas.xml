@@ -11,6 +11,14 @@
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
    </VSEOCLASS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>EXECUTE_GATE</CMPNAME>
+     <SCONAME>CO_MESSAGE_CONTAINER</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Return table</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
   </asx:values>
  </asx:abap>
 </abapGit>

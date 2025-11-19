@@ -31,28 +31,33 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
 
 
   METHOD create_handler.
-    DATA lo_obj TYPE REF TO object.
+
     TRY.
+        DATA lo_obj TYPE REF TO object.
         CREATE OBJECT lo_obj TYPE (i_classname).
       CATCH cx_sy_create_object_error INTO DATA(lx_create).
-        RAISE EXCEPTION TYPE zcx_apg_error
-          EXPORTING
-            previous = lx_create.
+        RAISE EXCEPTION TYPE zcx_apg_error EXPORTING previous = lx_create.
     ENDTRY.
-    ro_handler ?= lo_obj.
+
+    ro_handler = CAST #( lo_obj ).
+
   ENDMETHOD.
 
 
   METHOD get_handlers_for_gate.
-    DATA: lt_impl TYPE STANDARD TABLE OF zapg_gate_handle.
-    SELECT *
-    FROM zapg_gate_handle
-    INTO TABLE lt_impl
-    WHERE point_id = i_point_id
-    AND active = 'X'
-    ORDER BY seqno.
-    LOOP AT lt_impl ASSIGNING FIELD-SYMBOL(<ls_impl>).
+
+    SELECT FROM zapg_gate_handle AS gate
+      INNER JOIN zapg_point AS point ON point~point_id EQ gate~point_id
+      FIELDS gate~*
+      WHERE gate~point_id EQ @i_point_id
+        AND gate~active   EQ @abap_true
+    INTO TABLE @DATA(lt_gate_handle).
+
+    SORT lt_gate_handle BY seqno ASCENDING.
+
+    LOOP AT lt_gate_handle ASSIGNING FIELD-SYMBOL(<ls_impl>).
       APPEND create_handler( <ls_impl>-handler_class ) TO rt_handlers.
     ENDLOOP.
+
   ENDMETHOD.
 ENDCLASS.
