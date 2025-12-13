@@ -2,7 +2,7 @@
 
 # ABAP Point Gate
 
-The ABAP Point Gate is a structured approach to managing ABAP exit points by isolating custom code from the SAP core.
+The ABAP Point Gate is a structured approach to managing ABAP exit points by isolating custom code
 
 ## License
 This project is licensed under the [MIT License](https://github.com/greltel/ABAP-Point-Gate/blob/main/LICENSE).
