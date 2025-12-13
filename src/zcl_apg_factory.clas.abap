@@ -13,7 +13,7 @@ public section.
       !I_POINT_ID type ZAPG_POINT_ID
       !I_CONTEXT type ref to ZIF_APG_CONTEXT
     returning
-      value(RT_HANDLERS) type TT_APG_HANDLER
+      value(R_HANDLERS) type TT_APG_HANDLER
     raising
       ZCX_APG_ERROR .
 private section.
@@ -22,7 +22,7 @@ private section.
     importing
       !I_CLASSNAME type SEOCLSNAME
     returning
-      value(RO_HANDLER) type ref to ZIF_APG_HANDLER
+      value(R_HANDLER) type ref to ZIF_APG_HANDLER
     raising
       ZCX_APG_ERROR .
   class-methods CUSTOM_TOGGLE_IS_ACTIVE
@@ -42,13 +42,13 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
 
   METHOD create_handler.
 
-    CLEAR ro_handler.
+    CLEAR r_handler.
 
     TRY.
         DATA lo_obj TYPE REF TO object.
 
         CREATE OBJECT lo_obj TYPE (i_classname).
-        ro_handler = CAST #( lo_obj ).
+        r_handler = CAST #( lo_obj ).
 
       CATCH cx_sy_create_object_error INTO DATA(lx_create).
         RAISE EXCEPTION TYPE zcx_apg_error EXPORTING previous = lx_create.
@@ -114,7 +114,7 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
     CHECK lt_point_gate_handle IS NOT INITIAL.
 
     "Keep only the Active Gates and Return Handlers
-    rt_handlers = VALUE #( FOR ls IN lt_point_gate_handle
+    r_handlers = VALUE #( FOR ls IN lt_point_gate_handle
                          ( COND #( WHEN ls-gate-active EQ abap_true
                                    THEN create_handler( ls-gate-handler_class )
                                    WHEN ls-gate-active EQ c_custom_act_toggle
