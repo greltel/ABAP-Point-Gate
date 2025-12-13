@@ -6,7 +6,7 @@
 REPORT zabap_point_gate_sample.
 
 "Create Context Object and Give Data
-SELECT SINGLE FROM bkpf
+SELECT SINGLE FROM i_journalentry
   FIELDS *
   INTO NEW @DATA(lr_bkpf).
 
@@ -15,10 +15,10 @@ lo_context->set_data( i_name = 'BKPF' i_value = lr_bkpf ).
 
 "Call the gate
 TRY.
-    DATA lt_msg_cont TYPE bapiret2_t.
+    DATA lt_msg_cont TYPE zcl_apg_execution=>tt_bapiret2.
     zcl_apg_execution=>execute_gate( EXPORTING i_point_id = 'SAMPLE_SAVE_BEFORE'
-                                               i_context = lo_context
-                                     CHANGING co_message_container = lt_msg_cont ).
+                                               i_context  = lo_context
+                                     CHANGING  co_message_container = lt_msg_cont ).
 
     "Now we can read the message container for validations
 

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZAPG_POINT_TYPE</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>ZAPG_POINT_TYPE</DOMNAME>
+    <HEADLEN>26</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>10</SCRLEN2>
+    <SCRLEN3>26</SCRLEN3>
+    <DDTEXT>ABAP Point Gate Point Type</DDTEXT>
+    <REPTEXT>ABAP Point Gate Point Type</REPTEXT>
+    <SCRTEXT_S>Point Type</SCRTEXT_S>
+    <SCRTEXT_M>Point Type</SCRTEXT_M>
+    <SCRTEXT_L>ABAP Point Gate Point Type</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

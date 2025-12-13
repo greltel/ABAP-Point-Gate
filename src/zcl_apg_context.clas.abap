@@ -45,7 +45,7 @@ CLASS ZCL_APG_CONTEXT IMPLEMENTATION.
 
   METHOD zif_apg_context~set_data.
 
-    DELETE mt_data WHERE name = i_name.
+    DELETE mt_data WHERE name EQ i_name.
     INSERT VALUE ty_pair( name = i_name value = i_value ) INTO TABLE mt_data.
 
   ENDMETHOD.

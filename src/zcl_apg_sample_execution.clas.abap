@@ -13,11 +13,11 @@ CLASS ZCL_APG_SAMPLE_EXECUTION IMPLEMENTATION.
 
   METHOD zif_apg_handler~execute.
 
-    DATA ls_bkpf TYPE bkpf.
+    DATA ls_bkpf TYPE i_journalentry.
 
     TRY.
         " Get Data from Context
-        io_context->get_data( EXPORTING i_name = 'BKPF'
+        i_context->get_data( EXPORTING i_name = 'BKPF'
                               IMPORTING e_value = DATA(lr_data) ).
 
         ls_bkpf = lr_data->*.
@@ -27,7 +27,7 @@ CLASS ZCL_APG_SAMPLE_EXECUTION IMPLEMENTATION.
     ENDTRY.
 
     "Example validation
-    IF ls_bkpf-budat IS NOT INITIAL.
+    IF ls_bkpf-postingdate IS NOT INITIAL.
       " Fill message container or raise exception depending on design
       co_message_container = VALUE #( ( message = 'Budat Must Be Initial' type = 'E' ) ).
       " Example: raise exception
@@ -35,10 +35,10 @@ CLASS ZCL_APG_SAMPLE_EXECUTION IMPLEMENTATION.
     ENDIF.
 
     "Example Change Data
-    ls_bkpf-budat = syst-datum.
+    ls_bkpf-postingdate = syst-datum.
     lr_data->*    = ls_bkpf.
-    io_context->set_data( i_name  = 'BKPF'
-                          i_value = lr_data ).
+    i_context->set_data( i_name  = 'BKPF'
+                         i_value = lr_data ).
 
   ENDMETHOD.
 ENDCLASS.

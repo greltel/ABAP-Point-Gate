@@ -5,12 +5,14 @@ class ZCL_APG_EXECUTION definition
 
 public section.
 
+  TYPES TT_BAPIRET2 TYPE STANDARD TABLE OF BAPIRET2 WITH EMPTY KEY.
+
   class-methods EXECUTE_GATE
     importing
       !I_POINT_ID type ZAPG_POINT_ID
       !I_CONTEXT type ref to ZIF_APG_CONTEXT
     changing
-      !CO_MESSAGE_CONTAINER type BAPIRET2_T
+      !CO_MESSAGE_CONTAINER type TT_BAPIRET2
     raising
       ZCX_APG_ERROR .
 ENDCLASS.
@@ -22,7 +24,8 @@ CLASS ZCL_APG_EXECUTION IMPLEMENTATION.
 
   METHOD execute_gate.
 
-    DATA(lt_handlers) = zcl_apg_factory=>get_handlers_for_gate( i_point_id ).
+    DATA(lt_handlers) = zcl_apg_factory=>get_active_handlers_for_gate( i_point_id = i_point_id
+                                                                       i_context  = i_context ).
 
     LOOP AT lt_handlers INTO DATA(lo_handler).
 

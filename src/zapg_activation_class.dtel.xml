@@ -3,18 +3,18 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD04V>
-    <ROLLNAME>ZAPG_ACTIVE</ROLLNAME>
+    <ROLLNAME>ZAPG_ACTIVATION_CLASS</ROLLNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
-    <DOMNAME>ZAPG_ACTIVE</DOMNAME>
+    <DOMNAME>SEOCLSNAME</DOMNAME>
     <HEADLEN>55</HEADLEN>
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>20</SCRLEN2>
     <SCRLEN3>40</SCRLEN3>
-    <DDTEXT>ABAP Point Gate Active/Inactive</DDTEXT>
-    <REPTEXT>Activation Status</REPTEXT>
-    <SCRTEXT_S>Active</SCRTEXT_S>
-    <SCRTEXT_M>Activation Status</SCRTEXT_M>
-    <SCRTEXT_L>Activation Status</SCRTEXT_L>
+    <DDTEXT>ABAP Point Gate Activation Class</DDTEXT>
+    <REPTEXT>ABAP Point Gate Activation Class</REPTEXT>
+    <SCRTEXT_S>Act. Class</SCRTEXT_S>
+    <SCRTEXT_M>Activation Class</SCRTEXT_M>
+    <SCRTEXT_L>ABAP Point Gate Activation Class</SCRTEXT_L>
     <DTELMASTER>E</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>
