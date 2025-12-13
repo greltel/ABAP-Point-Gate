@@ -27,10 +27,10 @@ private section.
       ZCX_APG_ERROR .
   class-methods CUSTOM_TOGGLE_IS_ACTIVE
     importing
-      !IM_ACTIVATION_CLASS type ZAPG_ACTIVATION_CLASS
-      !IM_CONTEXT type ref to ZIF_APG_CONTEXT
+      !I_ACTIVATION_CLASS type ZAPG_ACTIVATION_CLASS
+      !I_CONTEXT type ref to ZIF_APG_CONTEXT
     returning
-      value(IS_ACTIVE) type BOOLEAN
+      value(R_IS_ACTIVE) type BOOLEAN
     raising
       ZCX_APG_ERROR .
 ENDCLASS.
@@ -59,17 +59,17 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
 
   METHOD custom_toggle_is_active.
 
-    CLEAR is_active.
+    CLEAR r_is_active.
 
     TRY.
         DATA lo_obj TYPE REF TO object.
 
-        CREATE OBJECT lo_obj TYPE (im_activation_class).
+        CREATE OBJECT lo_obj TYPE (i_activation_class).
         DATA(lo_handler) = CAST zif_apg_activation_toggle( lo_obj ).
-        is_active = lo_handler->is_active( im_context ).
+        r_is_active = lo_handler->is_active( i_context ).
 
       CATCH cx_sy_create_object_error INTO DATA(lx_create).
-        CLEAR is_active.
+        CLEAR r_is_active.
         RAISE EXCEPTION TYPE zcx_apg_error EXPORTING previous = lx_create.
     ENDTRY.
 
@@ -103,8 +103,8 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
     "Keep only the Active Points
     LOOP AT lt_point_gate_handle INTO DATA(ls_point) WHERE point-active EQ c_custom_act_toggle.
 
-      IF custom_toggle_is_active( im_activation_class = ls_point-point-activation_class
-                                  im_context = i_context ) EQ abap_false.
+      IF custom_toggle_is_active( i_activation_class = ls_point-point-activation_class
+                                  i_context = i_context ) EQ abap_false.
         ls_point-deletion_mark = abap_true.
       ENDIF.
 
@@ -118,7 +118,7 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
                          ( COND #( WHEN ls-gate-active EQ abap_true
                                    THEN create_handler( ls-gate-handler_class )
                                    WHEN ls-gate-active EQ c_custom_act_toggle
-                                   AND custom_toggle_is_active( im_activation_class = ls-gate-activation_class im_context = i_context )
+                                   AND custom_toggle_is_active( i_activation_class = ls-gate-activation_class i_context = i_context )
                                    THEN create_handler( ls-gate-handler_class ) ) ) ).
 
   ENDMETHOD.

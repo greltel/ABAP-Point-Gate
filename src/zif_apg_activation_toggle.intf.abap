@@ -6,7 +6,7 @@ interface ZIF_APG_ACTIVATION_TOGGLE
     importing
       !I_CONTEXT type ref to ZIF_APG_CONTEXT
     returning
-      value(RE_ACTIVE) type BOOLEAN
+      value(R_ACTIVE) type BOOLEAN
     raising
       ZCX_APG_ERROR .
 endinterface.

@@ -19,7 +19,7 @@
     </SEOSUBCOTX>
     <SEOSUBCOTX>
      <CMPNAME>IS_ACTIVE</CMPNAME>
-     <SCONAME>RE_ACTIVE</SCONAME>
+     <SCONAME>R_ACTIVE</SCONAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Boolean Variable (X = True, - = False, Space = Unknown)</DESCRIPT>
     </SEOSUBCOTX>

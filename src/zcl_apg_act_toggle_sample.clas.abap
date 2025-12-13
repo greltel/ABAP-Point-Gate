@@ -17,7 +17,7 @@ CLASS ZCL_APG_ACT_TOGGLE_SAMPLE IMPLEMENTATION.
 
   METHOD zif_apg_activation_toggle~is_active.
 
-    CLEAR re_active.
+    CLEAR r_active.
 
     TRY.
         DATA ls_bkpf TYPE bkpf.
@@ -29,11 +29,11 @@ CLASS ZCL_APG_ACT_TOGGLE_SAMPLE IMPLEMENTATION.
         ls_bkpf = lr_data->*.
 
         IF ls_bkpf-budat NE syst-datum.
-          re_active = abap_true.
+          r_active = abap_true.
         ENDIF.
 
       CATCH cx_root.
-        CLEAR re_active.
+        CLEAR r_active.
         RAISE EXCEPTION TYPE zcx_apg_error.
     ENDTRY.
 
