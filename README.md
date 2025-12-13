@@ -16,5 +16,5 @@ The repository was created by [George Drakos](https://www.linkedin.com/in/george
 ## Design Goals/Features
 
 * Install via [ABAPGit](http://abapgit.org)
-* ABAP Cloud/Clean Core compatibility.Passed SCI check variant S4HANA_READINESS_2023
+* ABAP Cloud/Clean Core compatibility.Passed SCI check variant S4HANA_READINESS_2023 and ABAP_CLOUD_READINESS
 * Unit Tested
