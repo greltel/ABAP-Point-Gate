@@ -1,5 +1,17 @@
 🚧 Status: Under Development
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/victorizbitskiy/zconcurrency_api/blob/main/LICENSE)
+![ABAP 7.00+](https://img.shields.io/badge/ABAP-7.00%2B-brightgreen)
+[![Code Statistics](https://img.shields.io/badge/CodeStatistics-abaplint-blue)](https://abaplint.app/stats/victorizbitskiy/zconcurrency_api)
+
+# Table of contents
+1. [ABAP Point Gate](#ABAP-Point-Gate)
+2. [License](#License)
+3. [Contributors-Developers](#Contributors-Developers)
+4. [Motivation for Creating the Repository](#Motivation-for-Creating-the-Repository)
+5. [Usage Examples](#Usage-Examples)
+6. [Design Goals/Features](#Design-Goals/Features)
+
 # ABAP Point Gate
 
 The ABAP Point Gate is a structured approach to managing ABAP exit points by isolating custom code
