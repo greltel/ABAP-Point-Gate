@@ -14,6 +14,15 @@ The repository was created by [George Drakos](https://www.linkedin.com/in/george
 
 ABAP Point Gate to provide a standardized “gate” around ABAP exit points/enhancements, so custom logic stays isolated from the SAP core instead of being scattered across standard objects. This helps keep the system clean, maintainable, and upgrade-friendly, while offering a consistent way to implement enhancements that aligns with Clean Core / ABAP Cloud readiness practices and encourages quality through automated checks (e.g. abaplint) and unit testing.
 
+## Usage Examples
+
+### 1. Initialization
+To start using the point gate, first call the context and get an instance
+
+```abap
+DATA(lo_context) = NEW zcl_apg_context( ).
+```
+
 ## Design Goals/Features
 
 * Install via [ABAPGit](http://abapgit.org)
