@@ -10,7 +10,7 @@
 3. [Contributors-Developers](#Contributors-Developers)
 4. [Motivation for Creating the Repository](#Motivation-for-Creating-the-Repository)
 5. [Usage Examples](#Usage-Examples)
-6. [Design Goals/Features](#Design-Goals/Features)
+6. [Design Goals-Features](#Design-Goals-Features)
 
 # ABAP Point Gate
 
@@ -81,7 +81,7 @@ CATCH zcx_apg_error INTO DATA(lx_apg).
 ENDTRY.
 ```
 
-## Design Goals/Features
+## Design Goals-Features
 
 * Install via [ABAPGit](http://abapgit.org)
 * ABAP Cloud/Clean Core compatibility.Passed SCI check variant S4HANA_READINESS_2023 and ABAP_CLOUD_READINESS
