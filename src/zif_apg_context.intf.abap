@@ -1,22 +1,42 @@
-INTERFACE zif_apg_context
-  PUBLIC .
+interface ZIF_APG_CONTEXT
+  public .
 
-  METHODS:
-    set_data
-      IMPORTING
-        i_name  TYPE string
-        i_value TYPE REF TO data,
-    get_data
-      IMPORTING
-        i_name  TYPE string
-      EXPORTING
-        e_value TYPE REF TO data
-      RAISING
-        zcx_apg_error,
-    has_data
-      IMPORTING
-        i_name       TYPE string
-      RETURNING
-        VALUE(r_has) TYPE abap_bool.
 
-ENDINTERFACE.
+  methods SET_DATA
+    importing
+      !I_NAME type STRING
+      !I_VALUE type ref to DATA .
+  methods GET_DATA
+    importing
+      !I_NAME type STRING
+    exporting
+      !E_VALUE type ref to DATA
+    raising
+      ZCX_APG_ERROR .
+  methods HAS_DATA
+    importing
+      !I_NAME type STRING
+    returning
+      value(R_HAS) type ABAP_BOOL .
+  methods GET_STRING
+    importing
+      !I_NAME type STRING
+    returning
+      value(R_VAL) type STRING
+    raising
+      ZCX_APG_ERROR .
+  methods GET_INTEGER
+    importing
+      !I_NAME type STRING
+    returning
+      value(R_VAL) type I
+    exceptions
+      ZCX_APG_ERROR .
+  methods GET_DATE
+    importing
+      !I_NAME type STRING
+    returning
+      value(R_VAL) type DATUM
+    exceptions
+      ZCX_APG_ERROR .
+endinterface.

@@ -50,6 +50,12 @@
      <LANGU>E</LANGU>
      <DESCRIPT>ABAP Point Gate Context</DESCRIPT>
     </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>INJECT_INSTANCE</CMPNAME>
+     <SCONAME>I_CLASSNAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Object Type Name</DESCRIPT>
+    </SEOSUBCOTX>
    </DESCRIPTIONS_SUB>
   </asx:values>
  </asx:abap>

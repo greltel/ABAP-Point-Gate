@@ -1,18 +1,24 @@
-CLASS zcl_apg_context DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZCL_APG_CONTEXT definition
+  public
+  final
+  create public .
 
-  PUBLIC SECTION.
+public section.
 
-    INTERFACES zif_apg_context .
+  interfaces ZIF_APG_CONTEXT .
 
-    ALIASES get_data
-      FOR zif_apg_context~get_data .
-    ALIASES has_data
-      FOR zif_apg_context~has_data .
-    ALIASES set_data
-      FOR zif_apg_context~set_data .
+  aliases GET_DATA
+    for ZIF_APG_CONTEXT~GET_DATA .
+  aliases GET_DATE
+    for ZIF_APG_CONTEXT~GET_DATE .
+  aliases GET_INTEGER
+    for ZIF_APG_CONTEXT~GET_INTEGER .
+  aliases GET_STRING
+    for ZIF_APG_CONTEXT~GET_STRING .
+  aliases HAS_DATA
+    for ZIF_APG_CONTEXT~HAS_DATA .
+  aliases SET_DATA
+    for ZIF_APG_CONTEXT~SET_DATA .
   PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES:
@@ -52,6 +58,64 @@ CLASS ZCL_APG_CONTEXT IMPLEMENTATION.
       INSERT VALUE #( name = i_name value = i_value ) INTO TABLE mt_data.
     ENDIF.
 
+
+  ENDMETHOD.
+
+
+  METHOD zif_apg_context~get_date.
+
+    get_data( EXPORTING i_name = i_name
+              IMPORTING e_value = DATA(lr_data) ).
+
+    IF lr_data IS BOUND.
+      ASSIGN lr_data->* TO FIELD-SYMBOL(<lv_val>).
+
+      TRY.
+          r_val = <lv_val>.
+        CATCH cx_root.
+          CLEAR r_val.
+      ENDTRY.
+
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD zif_apg_context~get_integer.
+
+    get_data( EXPORTING i_name  = i_name
+              IMPORTING e_value = DATA(lr_data) ).
+
+    IF lr_data IS BOUND.
+
+      ASSIGN lr_data->* TO FIELD-SYMBOL(<lv_val>).
+
+      TRY.
+          r_val = <lv_val>.
+        CATCH cx_root.
+      ENDTRY.
+
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD zif_apg_context~get_string.
+
+    get_data( EXPORTING i_name = i_name
+              IMPORTING e_value = DATA(lr_data) ).
+
+    IF lr_data IS BOUND.
+
+      ASSIGN lr_data->* TO FIELD-SYMBOL(<lv_val>).
+
+      TRY.
+          r_val = |{ <lv_val> }|.
+        CATCH cx_root.
+          CLEAR r_val.
+      ENDTRY.
+
+    ENDIF.
 
   ENDMETHOD.
 ENDCLASS.

@@ -12,6 +12,9 @@ SELECT SINGLE FROM i_journalentry
 
 DATA(lo_context) = NEW zcl_apg_context( ).
 lo_context->set_data( i_name = 'BKPF' i_value = lr_bkpf ).
+lo_context->set_data( i_name = 'STRING' i_value = REF #( 'TEST_STRING' ) ).
+lo_context->set_data( i_name = 'DATE' i_value = REF #( syst-datum ) ).
+lo_context->set_data( i_name = 'INTEGER' i_value = REF #( 'GIA' ) ).
 
 "Call the gate
 TRY.
@@ -25,9 +28,14 @@ TRY.
     "Or take the new data back
     lo_context->get_data( EXPORTING i_name = 'BKPF' IMPORTING e_value = DATA(lr_changed_bkpf) ).
 
+    DATA(lv_string)  = lo_context->get_string( 'STRING' ).
+    DATA(lv_date)    = lo_context->get_date( 'DATE' ).
+    DATA(lv_integer) = lo_context->get_integer( 'INTEGER' ).
+
     BREAK-POINT.
 
   CATCH zcx_apg_error INTO DATA(lx_apg).
+    DATA(lv_exception_text) = lx_apg->get_text( ).
     " Error handling: logging, rollback, user message etc.
     BREAK-POINT.
 ENDTRY.
