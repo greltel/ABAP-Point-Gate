@@ -1,25 +1,26 @@
-class ZCL_APG_CONTEXT definition
-  public
-  final
-  create public .
+CLASS zcl_apg_context DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
 
-  interfaces ZIF_APG_CONTEXT .
+    INTERFACES zif_apg_context .
 
-  aliases GET_DATA
-    for ZIF_APG_CONTEXT~GET_DATA .
-  aliases HAS_DATA
-    for ZIF_APG_CONTEXT~HAS_DATA .
-  aliases SET_DATA
-    for ZIF_APG_CONTEXT~SET_DATA .
+    ALIASES get_data
+      FOR zif_apg_context~get_data .
+    ALIASES has_data
+      FOR zif_apg_context~has_data .
+    ALIASES set_data
+      FOR zif_apg_context~set_data .
+  PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES:
       BEGIN OF ty_pair,
         name  TYPE string,
         value TYPE REF TO data,
       END OF ty_pair,
-      ty_pairs TYPE STANDARD TABLE OF ty_pair WITH DEFAULT KEY.
+      ty_pairs TYPE HASHED TABLE OF ty_pair WITH UNIQUE KEY name.
     DATA mt_data TYPE ty_pairs.
 ENDCLASS.
 
@@ -45,8 +46,12 @@ CLASS ZCL_APG_CONTEXT IMPLEMENTATION.
 
   METHOD zif_apg_context~set_data.
 
-    DELETE mt_data WHERE name EQ i_name.
-    INSERT VALUE ty_pair( name = i_name value = i_value ) INTO TABLE mt_data.
+    IF line_exists( mt_data[ name = i_name ] ).
+      mt_data[ name = i_name ]-value = i_value.
+    ELSE.
+      INSERT VALUE #( name = i_name value = i_value ) INTO TABLE mt_data.
+    ENDIF.
+
 
   ENDMETHOD.
 ENDCLASS.

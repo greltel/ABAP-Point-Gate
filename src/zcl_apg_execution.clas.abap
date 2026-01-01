@@ -15,6 +15,8 @@ public section.
       !CO_MESSAGE_CONTAINER type TT_BAPIRET2
     raising
       ZCX_APG_ERROR .
+protected section.
+private section.
 ENDCLASS.
 
 
@@ -29,8 +31,17 @@ CLASS ZCL_APG_EXECUTION IMPLEMENTATION.
 
     LOOP AT lt_handlers INTO DATA(lo_handler).
 
-      lo_handler->execute( EXPORTING i_context            = i_context
-                           CHANGING  co_message_container = co_message_container ).
+      TRY.
+          lo_handler->execute( EXPORTING i_context            = i_context
+                               CHANGING  co_message_container = co_message_container ).
+        CATCH zcx_apg_error INTO DATA(lx_apg_error).
+          DATA(lv_exception_message) = lx_apg_error->get_text( ).
+          co_message_container = VALUE #( BASE co_message_container ( type       = 'E'
+                                                                      id         = ''
+                                                                      number     = ''
+                                                                      message    = CONV #( lv_exception_message )
+                                                                      message_v1 = CONV #( lv_exception_message ) ) ).
+      ENDTRY.
 
     ENDLOOP.
 
