@@ -16,11 +16,57 @@ ABAP Point Gate to provide a standardized “gate” around ABAP exit points/enh
 
 ## Usage Examples
 
-### 1. Initialization
-To start using the point gate, first call the context and get an instance
+### 1. Prepare the Context
+Wrap your business data (e.g., structures, objects, variables) into the ZCL_APG_CONTEXT object.
 
 ```abap
 DATA(lo_context) = NEW zcl_apg_context( ).
+
+" Store the data with a unique name (e.g., 'BKPF')
+lo_context->set_data( i_name  = 'BKPF' 
+                      i_value = lr_bkpf ).
+```
+
+### 2.Execute the Gate
+Call the factory method EXECUTE_GATE with the specific Point ID.
+
+```abap
+TRY.
+    " 2. Call the Gate
+    " The Point ID 'SAMPLE_SAVE_BEFORE' must be configured in table ZAPG_POINT
+    zcl_apg_execution=>execute_gate(
+      EXPORTING
+        i_point_id           = 'SAMPLE_SAVE_BEFORE'
+        i_context            = lo_context
+      CHANGING
+        co_message_container = lt_msg_cont ).
+  CATCH zcx_apg_error INTO DATA(lx_apg).
+    " Handle framework errors (e.g., configuration missing, instantiation failed)
+    MESSAGE lx_apg TYPE 'E'.
+ENDTRY.
+```
+
+### 3.Handle Results
+Check for returned messages or retrieve modified data from the context.
+
+```abap
+TRY.    
+    " A. Check for validation messages returned by handlers
+    IF line_exists( lt_msg_cont[ type = 'E' ] ).
+       " Handle errors (e.g., abort save, show log)
+    ENDIF.
+
+    " B. Retrieve potentially modified data
+    " If a handler modified the data, we can get the updated reference back
+    lo_context->get_data( 
+      EXPORTING 
+        i_name  = 'BKPF' 
+      IMPORTING 
+        e_value = DATA(lr_changed_bkpf) ).
+CATCH zcx_apg_error INTO DATA(lx_apg).
+    " Handle framework errors (e.g., configuration missing, instantiation failed)
+    MESSAGE lx_apg TYPE 'E'.
+ENDTRY.
 ```
 
 ## Design Goals/Features
