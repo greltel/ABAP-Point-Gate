@@ -9,8 +9,9 @@
 2. [License](#License)
 3. [Contributors-Developers](#Contributors-Developers)
 4. [Motivation for Creating the Repository](#Motivation-for-Creating-the-Repository)
-5. [Usage Examples](#Usage-Examples)
-6. [Design Goals-Features](#Design-Goals-Features)
+5. [Key Technical Features](#Key-Technical-Features)
+6. [Usage Examples](#Usage-Examples)
+7. [Design Goals-Features](#Design-Goals-Features)
 
 # ABAP Point Gate
 
@@ -80,6 +81,15 @@ CATCH zcx_apg_error INTO DATA(lx_apg).
     MESSAGE lx_apg TYPE 'E'.
 ENDTRY.
 ```
+
+## Key Technical Features
+
+* Hierarchical Activation: Control execution at both Point and Gate levels.
+* Type-Safe Context: Easily pass and retrieve data with built-in type-safe getters.
+* Dependency Injection: Built-in support for Mocking handles and configurations for Unit Testing.
+* High Performance: Uses Hashed Tables ($O(1)$ complexity) for context and configuration lookups.
+* Clean ABAP: Leverages modern 7.40+ syntax and robust exception handling.
+
 ⚙️ Hierarchical Activation Logic
 
 ABAP Point Gate supports a sophisticated activation model:
