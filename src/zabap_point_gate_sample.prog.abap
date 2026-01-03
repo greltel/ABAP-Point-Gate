@@ -14,7 +14,7 @@ DATA(lo_context) = NEW zcl_apg_context( ).
 lo_context->set_data( i_name = 'BKPF' i_value = lr_bkpf ).
 lo_context->set_data( i_name = 'STRING' i_value = REF #( 'TEST_STRING' ) ).
 lo_context->set_data( i_name = 'DATE' i_value = REF #( syst-datum ) ).
-lo_context->set_data( i_name = 'INTEGER' i_value = REF #( 'GIA' ) ).
+lo_context->set_data( i_name = 'INTEGER' i_value = REF #( '123' ) ).
 
 "Call the gate
 TRY.
