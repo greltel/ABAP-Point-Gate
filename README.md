@@ -33,10 +33,10 @@ Wrap your business data (e.g., structures, objects, variables) into the ZCL_APG_
 
 ```abap
 DATA(lo_context) = NEW zcl_apg_context( ).
-
-" Store the data with a unique name (e.g., 'BKPF')
-lo_context->set_data( i_name  = 'BKPF' 
-                      i_value = lr_bkpf ).
+lo_context->set_data( i_name = 'BKPF' i_value = lr_bkpf ).
+lo_context->set_data( i_name = 'STRING' i_value = REF #( 'TEST_STRING' ) ).
+lo_context->set_data( i_name = 'DATE' i_value = REF #( syst-datum ) ).
+lo_context->set_data( i_name = 'INTEGER' i_value = REF #( '123' ) ).
 ```
 
 ### 2.Execute the Gate
@@ -70,11 +70,11 @@ TRY.
 
     " B. Retrieve potentially modified data
     " If a handler modified the data, we can get the updated reference back
-    lo_context->get_data( 
-      EXPORTING 
-        i_name  = 'BKPF' 
-      IMPORTING 
-        e_value = DATA(lr_changed_bkpf) ).
+    lo_context->get_data( EXPORTING i_name = 'BKPF' IMPORTING e_value = DATA(lr_changed_bkpf) ).
+
+    DATA(lv_string)  = lo_context->get_string( 'STRING' ).
+    DATA(lv_date)    = lo_context->get_date( 'DATE' ).
+    DATA(lv_integer) = lo_context->get_integer( 'INTEGER' ).
 CATCH zcx_apg_error INTO DATA(lx_apg).
     " Handle framework errors (e.g., configuration missing, instantiation failed)
     MESSAGE lx_apg TYPE 'E'.
