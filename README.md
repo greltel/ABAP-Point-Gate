@@ -29,7 +29,7 @@ ABAP Point Gate to provide a standardized “gate” around ABAP exit points/enh
 ## Usage Examples
 
 ### 1. Prepare the Context
-Wrap your business data (e.g., structures, objects, variables) into the ZCL_APG_CONTEXT object.
+Prepare the data environment before triggering a gate.
 
 ```abap
 DATA(lo_context) = NEW zcl_apg_context( ).
@@ -40,7 +40,7 @@ lo_context->set_data( i_name = 'INTEGER' i_value = REF #( '123' ) ).
 ```
 
 ### 2.Execute the Gate
-Call the factory method EXECUTE_GATE with the specific Point ID.
+Trigger the execution logic. The framework automatically identifies and runs all active handlers.
 
 ```abap
 TRY.
@@ -59,7 +59,7 @@ ENDTRY.
 ```
 
 ### 3.Handle Results
-Check for returned messages or retrieve modified data from the context.
+Retrieve modified data or parameters without manual casting.
 
 ```abap
 TRY.    
@@ -80,10 +80,17 @@ CATCH zcx_apg_error INTO DATA(lx_apg).
     MESSAGE lx_apg TYPE 'E'.
 ENDTRY.
 ```
+⚙️ Hierarchical Activation Logic
+
+ABAP Point Gate supports a sophisticated activation model:
+
+* Status 'X': Globally Active.
+* Status 'C' (Custom): Evaluation via a Custom Activation Class.
+* Parent-Child Rule: If the Point is inactive (or its custom toggle returns false), none of its assigned Gates will execute, regardless of their individual status.
 
 ## Design Goals-Features
 
 * Install via [ABAPGit](http://abapgit.org)
 * ABAP Cloud/Clean Core compatibility.Passed SCI check variant S4HANA_READINESS_2023 and ABAP_CLOUD_READINESS
-* Unit Testing for Context and Execution Classes
+* Unit Testing for Context and Execution Classes.Full support for ABAP Unit and Test Doubles.
 * [ABAPLint](https://github.com/apps/abaplint) checked
