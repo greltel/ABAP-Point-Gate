@@ -1,25 +1,34 @@
-class ZCL_APG_FACTORY definition
-  public
-  final
-  create public .
+CLASS zcl_apg_factory DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
 
-  types:
-    tt_apg_handler TYPE STANDARD TABLE OF REF TO zif_apg_handler WITH EMPTY KEY .
+    TYPES: BEGIN OF ty_point_gate_handle,
+             point         TYPE zapg_point,
+             gate          TYPE zapg_gate_handle,
+             deletion_mark TYPE abap_bool,
+           END OF ty_point_gate_handle,
 
-  class-methods GET_ACTIVE_HANDLERS_FOR_GATE
-    importing
-      !I_POINT_ID type ZAPG_POINT_ID
-      !I_CONTEXT type ref to ZIF_APG_CONTEXT
-    returning
-      value(R_HANDLERS) type TT_APG_HANDLER
-    raising
-      ZCX_APG_ERROR .
-  class-methods INJECT_INSTANCE
-    importing
-      !I_CLASSNAME type SEOCLSNAME
-      !I_INSTANCE type ref to OBJECT .
+           tt_point_gate_handle TYPE STANDARD TABLE OF ty_point_gate_handle WITH EMPTY KEY.
+
+
+    TYPES:
+      tt_apg_handler TYPE STANDARD TABLE OF REF TO zif_apg_handler WITH EMPTY KEY .
+
+    CLASS-METHODS get_active_handlers_for_gate
+      IMPORTING
+        !i_point_id       TYPE zapg_point_id
+        !i_context        TYPE REF TO zif_apg_context
+      RETURNING
+        VALUE(r_handlers) TYPE tt_apg_handler
+      RAISING
+        zcx_apg_error .
+    CLASS-METHODS inject_instance
+      IMPORTING
+        !i_classname TYPE seoclsname
+        !i_instance  TYPE REF TO object .
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -56,21 +65,7 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
 
     CLEAR r_handler.
 
-    ASSIGN mt_injections[ classname = i_classname ] TO FIELD-SYMBOL(<ls_injection>).
-    IF syst-subrc IS INITIAL AND <ls_injection> IS ASSIGNED.
-      r_handler = CAST #( <ls_injection>-instance ).
-      RETURN.
-    ENDIF.
-
-    TRY.
-        DATA lo_obj TYPE REF TO object.
-
-        CREATE OBJECT lo_obj TYPE (i_classname).
-        r_handler = CAST #( lo_obj ).
-
-      CATCH cx_sy_create_object_error INTO DATA(lx_create).
-        RAISE EXCEPTION TYPE zcx_apg_error EXPORTING previous = lx_create.
-    ENDTRY.
+    r_handler = zcl_apg_injector=>get_handler( i_classname ).
 
   ENDMETHOD.
 
@@ -79,27 +74,8 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
 
     CLEAR r_is_active.
 
-    TRY.
-        "Injection Check
-        ASSIGN mt_injections[ classname = i_activation_class ] TO FIELD-SYMBOL(<ls_injection>).
-        IF syst-subrc IS INITIAL AND <ls_injection> IS ASSIGNED.
-          DATA lo_toggle TYPE REF TO zif_apg_activation_toggle.
-          lo_toggle = CAST #( <ls_injection>-instance ).
-          r_is_active = lo_toggle->is_active( i_context ).
-          RETURN.
-        ENDIF.
-
-        "Normal Instantiation
-        DATA lo_obj TYPE REF TO object.
-
-        CREATE OBJECT lo_obj TYPE (i_activation_class).
-        DATA(lo_handler) = CAST zif_apg_activation_toggle( lo_obj ).
-        r_is_active = lo_handler->is_active( i_context ).
-
-      CATCH cx_sy_create_object_error INTO DATA(lx_create).
-        CLEAR r_is_active.
-        RAISE EXCEPTION TYPE zcx_apg_error EXPORTING previous = lx_create.
-    ENDTRY.
+    DATA(lo_toggle) = zcl_apg_injector=>get_toggle( i_activation_class ).
+    r_is_active = lo_toggle->is_active( i_context ).
 
   ENDMETHOD.
 
@@ -112,44 +88,49 @@ CLASS ZCL_APG_FACTORY IMPLEMENTATION.
     lr_active = VALUE #( ( sign = 'I' option = 'EQ' low = abap_true )
                          ( sign = 'I' option = 'EQ' low = c_custom_act_toggle ) ).
 
-    SELECT FROM zapg_gate_handle AS gate
-      INNER JOIN zapg_point AS point ON point~point_id EQ gate~point_id
-      FIELDS point~*     AS point,
-             gate~*      AS gate,
-             @abap_false AS deletion_mark
-      WHERE   gate~point_id EQ @i_point_id
-        AND ( gate~active   IN @lr_active )
-       AND  ( point~active  IN @lr_active )
-    ORDER BY gate~seqno ASCENDING
-    INTO TABLE @DATA(lt_point_gate_handle).
+    DATA lt_point_gate_handle TYPE tt_point_gate_handle.
 
-    IF lt_point_gate_handle IS INITIAL.
-      RAISE EXCEPTION TYPE zcx_apg_error EXPORTING textid = TEXT-001.
+    zcl_apg_injector=>get_configuration(
+      EXPORTING i_point_id = i_point_id
+      IMPORTING e_config   = lt_point_gate_handle ).
+
+
+    IF lt_point_gate_handle IS INITIAL."NO MOCK EXISTS
+
+      SELECT FROM zapg_gate_handle AS gate
+          INNER JOIN zapg_point AS point ON point~point_id EQ gate~point_id
+          FIELDS point~*     AS point,
+                 gate~*      AS gate,
+                 @abap_false AS deletion_mark
+          WHERE   gate~point_id EQ @i_point_id
+            AND ( gate~active   IN @lr_active )
+           AND  ( point~active  IN @lr_active )
+        ORDER BY gate~seqno ASCENDING
+        INTO TABLE @lt_point_gate_handle.
+
     ENDIF.
 
-    "Keep only the Active Points of Custom Toggle
-    LOOP AT lt_point_gate_handle INTO DATA(ls_point) WHERE point-active EQ c_custom_act_toggle.
+    LOOP AT lt_point_gate_handle INTO DATA(ls_cfg).
 
-      IF custom_toggle_is_active( i_activation_class = ls_point-point-activation_class
-                                  i_context          = i_context ) EQ abap_false.
-        ls_point-deletion_mark = abap_true.
+      IF ls_cfg-point-active EQ c_custom_act_toggle.
+        IF zcl_apg_injector=>get_toggle( ls_cfg-point-activation_class )->is_active( i_context ) EQ abap_false.
+          CONTINUE.
+        ENDIF.
+      ENDIF.
+
+      IF ls_cfg-gate-active EQ abap_true.
+
+        APPEND zcl_apg_injector=>get_handler( ls_cfg-gate-handler_class ) TO r_handlers.
+
+      ELSEIF ls_cfg-gate-active EQ c_custom_act_toggle.
+
+        IF zcl_apg_injector=>get_toggle( ls_cfg-gate-activation_class )->is_active( i_context ) EQ abap_true.
+          APPEND zcl_apg_injector=>get_handler( ls_cfg-gate-handler_class ) TO r_handlers.
+        ENDIF.
+
       ENDIF.
 
     ENDLOOP.
-
-    DELETE lt_point_gate_handle WHERE deletion_mark EQ abap_true.
-    IF lt_point_gate_handle IS INITIAL.
-      RAISE EXCEPTION TYPE zcx_apg_error EXPORTING textid = TEXT-001.
-    ENDIF.
-
-    "Keep only the Active Gates and Return Handlers
-    r_handlers = VALUE #( FOR ls IN lt_point_gate_handle
-                         ( COND #( WHEN ls-gate-active EQ abap_true
-                                   THEN create_handler( ls-gate-handler_class )
-
-                                   WHEN ls-gate-active EQ c_custom_act_toggle
-                                   AND custom_toggle_is_active( i_activation_class = ls-gate-activation_class i_context = i_context )
-                                   THEN create_handler( ls-gate-handler_class ) ) ) ).
 
   ENDMETHOD.
 

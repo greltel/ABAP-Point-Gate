@@ -52,12 +52,11 @@ CLASS ZCL_APG_CONTEXT IMPLEMENTATION.
 
   METHOD zif_apg_context~set_data.
 
-    IF line_exists( mt_data[ name = i_name ] ).
-      mt_data[ name = i_name ]-value = i_value.
-    ELSE.
-      INSERT VALUE #( name = i_name value = i_value ) INTO TABLE mt_data.
-    ENDIF.
-
+    TRY.
+        mt_data[ name = i_name ]-value = i_value.
+      CATCH cx_sy_itab_line_not_found.
+        INSERT VALUE #( name = i_name value = i_value ) INTO TABLE mt_data.
+    ENDTRY.
 
   ENDMETHOD.
 

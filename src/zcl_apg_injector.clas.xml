@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_APG_INJECTOR</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>ABAP Point Gate Injector</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CMPNAME>GET_HANDLER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get a Mock or Real Handler</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>GET_TOGGLE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get a Mock or Real Toggle</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>INJECT_INSTANCE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Inject Instance</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>GET_CONFIGURATION</CMPNAME>
+     <SCONAME>I_POINT_ID</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Point Gate ID</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>INJECT_CONFIGURATION</CMPNAME>
+     <SCONAME>I_POINT_ID</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Point Gate ID</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>
