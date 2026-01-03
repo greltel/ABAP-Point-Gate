@@ -27,6 +27,22 @@ The repository was created by [George Drakos](https://www.linkedin.com/in/george
 
 ABAP Point Gate to provide a standardized “gate” around ABAP exit points/enhancements, so custom logic stays isolated from the SAP core instead of being scattered across standard objects. This helps keep the system clean, maintainable, and upgrade-friendly, while offering a consistent way to implement enhancements that aligns with Clean Core / ABAP Cloud readiness practices and encourages quality through automated checks (e.g. abaplint) and unit testing.
 
+## Key Technical Features
+
+* Hierarchical Activation: Control execution at both Point and Gate levels.
+* Type-Safe Context: Easily pass and retrieve data with built-in type-safe getters.
+* Dependency Injection: Built-in support for Mocking handles and configurations for Unit Testing.
+* High Performance: Uses Hashed Tables ($O(1)$ complexity) for context and configuration lookups.
+* Clean ABAP: Leverages modern 7.40+ syntax and robust exception handling.
+
+⚙️ Hierarchical Activation Logic
+
+ABAP Point Gate supports a sophisticated activation model:
+
+* Status 'X': Globally Active.
+* Status 'C' (Custom): Evaluation via a Custom Activation Class.
+* Parent-Child Rule: If the Point is inactive (or its custom toggle returns false), none of its assigned Gates will execute, regardless of their individual status.
+
 ## Usage Examples
 
 ### 1. Prepare the Context
@@ -81,22 +97,6 @@ CATCH zcx_apg_error INTO DATA(lx_apg).
     MESSAGE lx_apg TYPE 'E'.
 ENDTRY.
 ```
-
-## Key Technical Features
-
-* Hierarchical Activation: Control execution at both Point and Gate levels.
-* Type-Safe Context: Easily pass and retrieve data with built-in type-safe getters.
-* Dependency Injection: Built-in support for Mocking handles and configurations for Unit Testing.
-* High Performance: Uses Hashed Tables ($O(1)$ complexity) for context and configuration lookups.
-* Clean ABAP: Leverages modern 7.40+ syntax and robust exception handling.
-
-⚙️ Hierarchical Activation Logic
-
-ABAP Point Gate supports a sophisticated activation model:
-
-* Status 'X': Globally Active.
-* Status 'C' (Custom): Evaluation via a Custom Activation Class.
-* Parent-Child Rule: If the Point is inactive (or its custom toggle returns false), none of its assigned Gates will execute, regardless of their individual status.
 
 ## Design Goals-Features
 
