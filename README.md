@@ -103,4 +103,4 @@ ENDTRY.
 * Install via [ABAPGit](http://abapgit.org)
 * ABAP Cloud/Clean Core compatibility.Passed SCI check variant S4HANA_READINESS_2023 and ABAP_CLOUD_READINESS
 * Unit Testing for Context and Execution Classes.Full support for ABAP Unit and Test Doubles.
-* [ABAPLint](https://github.com/apps/abaplint) checked
+* [ABAPLint](https://github.com/apps/abaplint) enabled
