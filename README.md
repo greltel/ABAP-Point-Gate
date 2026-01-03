@@ -12,6 +12,7 @@
 5. [Key Technical Features](#Key-Technical-Features)
 6. [Usage Examples](#Usage-Examples)
 7. [Design Goals-Features](#Design-Goals-Features)
+8. [Roadmap](#Roadmap)
 
 # ABAP Point Gate
 
@@ -104,3 +105,11 @@ ENDTRY.
 * ABAP Cloud/Clean Core compatibility.Passed SCI check variant S4HANA_READINESS_2023 and ABAP_CLOUD_READINESS
 * Unit Testing for Context and Execution Classes.Full support for ABAP Unit and Test Doubles.
 * [ABAPLint](https://github.com/apps/abaplint) enabled
+
+## Roadmap
+
+* v1.1.0: Integrated Logging & Monitoring System.
+
+* v1.2.0: Parallel Processing for independent handlers.
+
+* v2.0.0: Fiori App for Configuration Management (RAP based).
