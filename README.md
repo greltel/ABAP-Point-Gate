@@ -1,6 +1,7 @@
 # ✅ Status: Initial Release (v1.0.0)
 > **Open Source Contribution:** This project is community-driven and **Open Source**! 🚀  
 > If you spot a bug or have an idea for a cool enhancement, your contributions are more than welcome. Feel free to open an **Issue** or submit a **Pull Request**.
+
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/greltel/ABAP-Point-Gate/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/greltel/ABAP-Point-Gate/blob/main/LICENSE)
 ![ABAP 7.00+](https://img.shields.io/badge/ABAP-7.00%2B-brightgreen)
