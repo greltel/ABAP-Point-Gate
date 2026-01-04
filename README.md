@@ -9,17 +9,23 @@
 
 # Table of contents
 1. [ABAP Point Gate](#ABAP-Point-Gate)
-2. [License](#License)
-3. [Contributors-Developers](#Contributors-Developers)
-4. [Motivation for Creating the Repository](#Motivation-for-Creating-the-Repository)
-5. [Key Technical Features](#Key-Technical-Features)
-6. [Usage Examples](#Usage-Examples)
-7. [Design Goals-Features](#Design-Goals-Features)
-8. [Roadmap](#Roadmap)
+2. [Prerequisites](#Prerequisites)
+3. [License](#License)
+4. [Contributors-Developers](#Contributors-Developers)
+5. [Motivation for Creating the Repository](#Motivation-for-Creating-the-Repository)
+6. [Key Technical Features](#Key-Technical-Features)
+7. [Usage Examples](#Usage-Examples)
+8. [Design Goals-Features](#Design-Goals-Features)
+9. [Roadmap](#Roadmap)
 
 # ABAP Point Gate
 
 ABAP Point Gate is a configuration-driven framework designed to decouple custom enhancements from standard SAP objects, ensuring a clean and maintainable architecture. By leveraging Dependency Injection and Type-Safe Context management, it enables seamless unit testing and granular, hierarchical control over enhancement execution.
+
+# Prerequisites
+
+* SAP S/4HANA 2021 (or higher) OR SAP BTP ABAP Environment.
+* XCO library availability
 
 ## License
 This project is licensed under the [MIT License](https://github.com/greltel/ABAP-Point-Gate/blob/main/LICENSE).
