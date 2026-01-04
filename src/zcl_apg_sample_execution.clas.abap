@@ -4,6 +4,8 @@ FINAL
 CREATE PUBLIC.
   PUBLIC SECTION.
     INTERFACES zif_apg_handler.
+protected section.
+private section.
 ENDCLASS.
 
 
@@ -35,7 +37,7 @@ CLASS ZCL_APG_SAMPLE_EXECUTION IMPLEMENTATION.
     ENDIF.
 
     "Example Change Data
-    ls_bkpf-postingdate = syst-datum.
+    ls_bkpf-postingdate = cl_abap_context_info=>get_system_date( ).
     lr_data->*    = ls_bkpf.
     i_context->set_data( i_name  = 'BKPF'
                          i_value = lr_data ).

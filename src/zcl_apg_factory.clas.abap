@@ -27,33 +27,35 @@ CLASS zcl_apg_factory DEFINITION
         zcx_apg_error .
     CLASS-METHODS inject_instance
       IMPORTING
-        !i_classname TYPE seoclsname
+        !i_classname TYPE sxco_ao_object_name
         !i_instance  TYPE REF TO object .
   PROTECTED SECTION.
-  PRIVATE SECTION.
+private section.
 
-    TYPES: BEGIN OF ty_injection,
-             classname TYPE seoclsname,
+  types:
+    BEGIN OF ty_injection,
+             classname TYPE sxco_ao_object_name,
              instance  TYPE REF TO object,
-           END OF ty_injection.
+           END OF ty_injection .
 
-    CLASS-DATA mt_injections TYPE HASHED TABLE OF ty_injection WITH UNIQUE KEY classname.
+  class-data:
+    mt_injections TYPE HASHED TABLE OF ty_injection WITH UNIQUE KEY classname .
 
-    CLASS-METHODS create_handler
-      IMPORTING
-        !i_classname     TYPE seoclsname
-      RETURNING
-        VALUE(r_handler) TYPE REF TO zif_apg_handler
-      RAISING
-        zcx_apg_error .
-    CLASS-METHODS custom_toggle_is_active
-      IMPORTING
-        !i_activation_class TYPE zapg_activation_class
-        !i_context          TYPE REF TO zif_apg_context
-      RETURNING
-        VALUE(r_is_active)  TYPE boolean
-      RAISING
-        zcx_apg_error .
+  class-methods CREATE_HANDLER
+    importing
+      !I_CLASSNAME type SXCO_AO_OBJECT_NAME
+    returning
+      value(R_HANDLER) type ref to ZIF_APG_HANDLER
+    raising
+      ZCX_APG_ERROR .
+  class-methods CUSTOM_TOGGLE_IS_ACTIVE
+    importing
+      !I_ACTIVATION_CLASS type ZAPG_ACTIVATION_CLASS
+      !I_CONTEXT type ref to ZIF_APG_CONTEXT
+    returning
+      value(R_IS_ACTIVE) type ABAP_BOOLEAN
+    raising
+      ZCX_APG_ERROR .
 ENDCLASS.
 
 

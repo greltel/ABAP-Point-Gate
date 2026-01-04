@@ -24,24 +24,24 @@ CLASS ltc_context_test IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = 'Hello'
       act = mo_cut->get_string( 'TEST' )
-      msg = 'Το String δεν ανακτήθηκε σωστά από το context' ).
+      msg = 'No string coming from context' ).
   ENDMETHOD.
 
   METHOD test_date_conversion.
-    DATA(lv_date) = sy-datum.
+    DATA(lv_date) = cl_abap_context_info=>get_system_date( ).
     mo_cut->set_data( i_name = 'MYDATE' i_value = REF #( lv_date ) ).
 
     cl_abap_unit_assert=>assert_equals(
-      exp = sy-datum
+      exp = cl_abap_context_info=>get_system_date( )
       act = mo_cut->get_date( 'MYDATE' )
-      msg = 'Η ημερομηνία πρέπει να επιστρέφεται σωστά' ).
+      msg = 'Date should be returned' ).
   ENDMETHOD.
 
   METHOD test_missing_data.
 
     cl_abap_unit_assert=>assert_initial(
       act = mo_cut->get_string( 'NOT_EXISTS' )
-      msg = 'Πρέπει να επιστρέφει initial αν δεν υπάρχει το data' ).
+      msg = 'If no data exists,initial should be returned' ).
 
   ENDMETHOD.
 
