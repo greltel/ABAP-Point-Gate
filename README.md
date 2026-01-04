@@ -108,8 +108,6 @@ ENDTRY.
 
 ## Roadmap
 
-* v1.1.0: Integrated Logging & Monitoring System.
-
-* v1.2.0: Parallel Processing for independent handlers.
-
-* v2.0.0: Fiori App for Configuration Management (RAP based).
+* Integrated Logging & Monitoring System.
+* Parallel Processing for independent handlers.
+* Fiori App for Configuration Management (RAP based).
