@@ -17,7 +17,8 @@
 6. [Key Technical Features](#Key-Technical-Features)
 7. [Usage Examples](#Usage-Examples)
 8. [Design Goals-Features](#Design-Goals-Features)
-9. [Roadmap](#Roadmap)
+9. [Changelog](#Changelog)
+10. [Roadmap](#Roadmap)
 
 # ABAP Point Gate
 
@@ -108,6 +109,19 @@ CATCH zcx_apg_error INTO DATA(lx_apg).
     MESSAGE lx_apg TYPE 'E'.
 ENDTRY.
 ```
+
+## Changelog
+
+### [1.1.0] - 2023-10-27
+#### Added
+- **JSON Serialization:** New method `log_data_add` allows logging of any data type (Structures/Tables). Data is automatically converted to JSON format using the XCO library.
+
+### [1.0.0] - 2023-10-01
+#### Initial Release
+- Basic logging capabilities (Messages, Strings, Exceptions).
+- Fluent Interface support.
+- ABAP Cloud & Clean Core compliance.
+- Integration with SAP Application Log (BAL).
 
 ## Design Goals-Features
 
