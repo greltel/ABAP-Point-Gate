@@ -112,16 +112,8 @@ ENDTRY.
 
 ## Changelog
 
-### [1.1.0] - 2026-01-04
-#### Added
-* JSON Serialization: New method `log_data_add` allows logging of any data type (Structures/Tables). Data is automatically converted to JSON format using the XCO library.
-
-### [1.0.0] - 2025-12-20
+### [1.0.0] - 2026-01-04
 #### Initial Release
-* Basic logging capabilities (Messages, Strings, Exceptions).
-* Fluent Interface support.
-* ABAP Cloud & Clean Core compliance.
-* Integration with SAP Application Log (BAL).
 
 ## Design Goals-Features
 
