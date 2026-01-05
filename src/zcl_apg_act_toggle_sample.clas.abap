@@ -28,7 +28,7 @@ CLASS ZCL_APG_ACT_TOGGLE_SAMPLE IMPLEMENTATION.
 
         ls_bkpf = lr_data->*.
 
-        IF ls_bkpf-budat NE syst-datum.
+        IF ls_bkpf-budat NE CL_ABAP_CONTEXT_INFO=>get_system_date( ).
           r_active = abap_true.
         ENDIF.
 

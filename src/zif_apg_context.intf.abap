@@ -36,7 +36,7 @@ interface ZIF_APG_CONTEXT
     importing
       !I_NAME type STRING
     returning
-      value(R_VAL) type DATUM
+      value(R_VAL) type XSDDATE_D
     exceptions
       ZCX_APG_ERROR .
 endinterface.
