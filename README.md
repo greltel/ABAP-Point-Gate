@@ -124,6 +124,6 @@ ENDTRY.
 
 ## Roadmap
 
+* Fiori App for Configuration Management (RAP based).Replace the cluster table to make it full ABAP Cloud compatible.
 * Integrated Logging & Monitoring System.
 * Parallel Processing for independent handlers.
-* Fiori App for Configuration Management (RAP based).
