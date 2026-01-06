@@ -8,10 +8,10 @@ REPORT zabap_point_gate_sample.
 "Create Context Object and Give Data
 SELECT SINGLE FROM i_journalentry
   FIELDS *
-  INTO NEW @DATA(lr_bkpf).
+  INTO NEW @DATA(lr_journalentry).
 
 DATA(lo_context) = NEW zcl_apg_context( ).
-lo_context->set_data( i_name = 'BKPF' i_value = lr_bkpf ).
+lo_context->set_data( i_name = 'JOURNAL_ENTRY' i_value = lr_journalentry ).
 lo_context->set_data( i_name = 'STRING' i_value = REF #( 'TEST_STRING' ) ).
 lo_context->set_data( i_name = 'DATE' i_value = REF #( syst-datum ) ).
 lo_context->set_data( i_name = 'INTEGER' i_value = REF #( '123' ) ).
@@ -26,7 +26,7 @@ TRY.
     "Now we can read the message container for validations
 
     "Or take the new data back
-    lo_context->get_data( EXPORTING i_name = 'BKPF' IMPORTING e_value = DATA(lr_changed_bkpf) ).
+    lo_context->get_data( EXPORTING i_name = 'JOURNAL_ENTRY' IMPORTING e_value = DATA(lr_changed_journalentry) ).
 
     DATA(lv_string)  = lo_context->get_string( 'STRING' ).
     DATA(lv_date)    = lo_context->get_date( 'DATE' ).

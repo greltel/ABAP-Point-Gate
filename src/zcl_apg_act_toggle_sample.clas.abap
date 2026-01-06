@@ -20,15 +20,15 @@ CLASS ZCL_APG_ACT_TOGGLE_SAMPLE IMPLEMENTATION.
     CLEAR r_active.
 
     TRY.
-        DATA ls_bkpf TYPE bkpf.
+        DATA ls_journalentry TYPE i_journalentry.
 
         "Get Data from Context
-        i_context->get_data( EXPORTING i_name = 'BKPF'
-                              IMPORTING e_value = DATA(lr_data) ).
+        i_context->get_data( EXPORTING i_name = 'JOURNAL_ENTRY'
+                             IMPORTING e_value = DATA(lr_data) ).
 
-        ls_bkpf = lr_data->*.
+        ls_journalentry = lr_data->*.
 
-        IF ls_bkpf-budat NE CL_ABAP_CONTEXT_INFO=>get_system_date( ).
+        IF ls_journalentry-postingdate NE cl_abap_context_info=>get_system_date( ).
           r_active = abap_true.
         ENDIF.
 
