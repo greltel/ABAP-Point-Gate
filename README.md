@@ -5,8 +5,8 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/greltel/ABAP-Point-Gate/releases)
 ![ABAP Cloud](https://img.shields.io/badge/ABAP-Cloud%20Ready-green)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/greltel/ABAP-Point-Gate/blob/main/LICENSE)
-![ABAP 7.00+](https://img.shields.io/badge/ABAP-7.00%2B-brightgreen)
-[![Code Statistics](https://img.shields.io/badge/CodeStatistics-abaplint-blue)](https://abaplint.app/stats/greltel/ABAP-Point-Gate)
+![ABAP 7.00+](https://img.shields.io/badge/ABAP-7.54%2B-brightgreen)
+[![Code Statistics](https://img.shields.io/badge/CodeStatistics-abaplint-blue)](https://abaplint.app/stats/greltel/abap-point-gate)
 
 # Table of contents
 1. [ABAP Point Gate](#ABAP-Point-Gate)
