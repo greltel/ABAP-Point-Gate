@@ -1,0 +1,14 @@
+{
+  "BASEINFO": {
+    "FROM": [
+      "ZR_APG_POINT"
+    ],
+    "ASSOCIATED": [
+      "ZC_APG_GATEHANDLE",
+      "ZR_APG_GATEHANDLE"
+    ],
+    "BASE": [
+      "ZR_APG_POINT"
+    ]
+  }
+}

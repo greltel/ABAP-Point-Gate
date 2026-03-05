@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for Point Gate'
+define service ZUI_APG_POINT_V4 {
+  expose ZC_APG_Point      as Point;
+  expose ZC_APG_GateHandle as Gate;
+}

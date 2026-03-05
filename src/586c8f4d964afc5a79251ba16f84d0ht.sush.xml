@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SUSH" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <HEAD>
+    <NAME>586C8F4D964AFC5A79251BA16F84D0</NAME>
+    <TYPE>HT</TYPE>
+    <DISPLAY_NAME>R3TR G4BA ZUI_APG_POINT_V4_O4</DISPLAY_NAME>
+   </HEAD>
+   <USOBHASH>
+    <PGMID>R3TR</PGMID>
+    <OBJECT>G4BA</OBJECT>
+    <OBJ_NAME>ZUI_APG_POINT_V4_O4</OBJ_NAME>
+   </USOBHASH>
+  </asx:values>
+ </asx:abap>
+</abapGit>

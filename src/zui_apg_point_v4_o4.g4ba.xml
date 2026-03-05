@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_G4BA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <_-IWBEP_-I_V4_MSGA>
+    <_-IWBEP_-I_V4_MSGA>
+     <GROUP_ID>ZUI_APG_POINT_V4_O4</GROUP_ID>
+     <SERVICE_ID>/IWBEP/COMMON</SERVICE_ID>
+     <REPOSITORY_ID>DEFAULT</REPOSITORY_ID>
+     <GWBEP_VERSION>031</GWBEP_VERSION>
+    </_-IWBEP_-I_V4_MSGA>
+   </_-IWBEP_-I_V4_MSGA>
+   <_-IWBEP_-I_V4_MSGR>
+    <_-IWBEP_-I_V4_MSGR>
+     <GROUP_ID>ZUI_APG_POINT_V4_O4</GROUP_ID>
+     <GWBEP_VERSION>031</GWBEP_VERSION>
+     <ASSIGNMENT_REPO_ID>SADL</ASSIGNMENT_REPO_ID>
+     <EXTERNAL_GROUP_ID>ZUI_APG_POINT_V4_O4</EXTERNAL_GROUP_ID>
+    </_-IWBEP_-I_V4_MSGR>
+   </_-IWBEP_-I_V4_MSGR>
+   <_-IWBEP_-I_V4_MSGT>
+    <_-IWBEP_-I_V4_MSGT>
+     <GROUP_ID>ZUI_APG_POINT_V4_O4</GROUP_ID>
+     <LANGUAGE>E</LANGUAGE>
+     <DESCRIPTION>ZUI_APG_POINT_V4_O4 Service Binding</DESCRIPTION>
+    </_-IWBEP_-I_V4_MSGT>
+   </_-IWBEP_-I_V4_MSGT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

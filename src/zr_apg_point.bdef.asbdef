@@ -1,0 +1,65 @@
+managed implementation in class zbp_r_apg_point unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_APG_Point alias Point
+persistent table zapg_point
+draft table zapg_point_d
+lock master total etag LastChangedAt
+authorization master ( global )
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  // Αυτές οι εντολές λύνουν τα σφάλματα "Edit", "Resume" και "Prepare"
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  association _Gates { create; with draft; }
+
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, PointId;
+
+  mapping for zapg_point
+    {
+      PointId         = point_id;
+      Active          = active;
+      ActivationClass = activation_class;
+      CreatedAt       = created_at;
+      CreatedBy       = created_by;
+      LastChangedAt   = last_changed_at;
+      LastChangedBy   = last_changed_by;
+    }
+}
+
+define behavior for ZR_APG_GateHandle alias Gate
+persistent table zapg_gate_handle
+draft table zapg_gate_h_d  // Βεβαιώσου ότι έχεις κάνει generate αυτόν τον πίνακα
+lock dependent by _Point
+authorization dependent by _Point
+etag master LastChangedAt
+{
+  update;
+  delete;
+
+  association _Point { with draft; }
+
+  field ( readonly ) PointId, CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, HandlerClass, SeqNo;
+
+  mapping for zapg_gate_handle
+    {
+      PointId         = point_id;
+      HandlerClass    = handler_class;
+      SeqNo           = seqno;
+      Active          = active;
+      ActivationClass = activation_class;
+      CreatedAt       = created_at;
+      CreatedBy       = created_by;
+      LastChangedAt   = last_changed_at;
+      LastChangedBy   = last_changed_by;
+    }
+}
