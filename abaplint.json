@@ -43,7 +43,7 @@
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],
-      "clas": "^ZC(L|X)",
+      "clas": "^Z(C[LX]|BP)",
       "intf": "^ZIF",
       "prog": "^Z",
       "fugr": "^Z",
