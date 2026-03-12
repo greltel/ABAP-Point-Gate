@@ -25,5 +25,9 @@ annotate view ZC_APG_Point with
       identification: [ { position: 30 } ],
       selectionField: [ { position: 30 } ] 
   }
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_APG_ClassVH', element: 'ClassName' } }]
   ActivationClass;
+  
+  @UI.hidden: true
+  LastChangedAt;
 }

@@ -7,6 +7,7 @@ define view entity ZC_APG_GateHandle
     key PointId,
     key SeqNo,
     Active,
+    ActiveCriticality,
     ActivationClass,
     HandlerClass,
     LastChangedAt,

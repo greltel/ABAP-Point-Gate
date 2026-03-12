@@ -38,7 +38,7 @@ etag master LastChangedAt
 
 define behavior for ZR_APG_GateHandle alias Gate
 persistent table zapg_gate_handle
-draft table zapg_gate_h_d  // Βεβαιώσου ότι έχεις κάνει generate αυτόν τον πίνακα
+draft table zapg_gate_h_d
 lock dependent by _Point
 authorization dependent by _Point
 etag master LastChangedAt

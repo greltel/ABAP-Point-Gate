@@ -1,0 +1,8 @@
+{
+  "BASEINFO": {
+    "FROM": [
+      "SEOCLASS",
+      "SEOCLASSTX"
+    ]
+  }
+}

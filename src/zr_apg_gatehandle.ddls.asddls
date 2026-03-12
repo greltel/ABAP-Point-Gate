@@ -21,6 +21,12 @@ define view entity ZR_APG_GateHandle
       handler_class    as HandlerClass,
 
       active           as Active,
+
+      case active
+        when 'X' then 3
+        else 1
+        end                  as ActiveCriticality,
+
       activation_class as ActivationClass,
 
       /* Admin Data */
