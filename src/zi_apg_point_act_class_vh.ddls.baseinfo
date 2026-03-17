@@ -1,8 +1,7 @@
 {
   "BASEINFO": {
     "FROM": [
-      "SEOCLASS",
-      "SEOCLASSTX"
+      "ZAPG_POINT"
     ]
   }
 }

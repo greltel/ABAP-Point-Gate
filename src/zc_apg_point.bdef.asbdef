@@ -2,7 +2,7 @@ projection;
 strict ( 2 );
 use draft;
 
-define behavior for ZC_APG_Point //alias <alias_name>
+define behavior for ZC_APG_Point
 {
   use create;
   use update;
@@ -17,7 +17,7 @@ define behavior for ZC_APG_Point //alias <alias_name>
   use association _Gates { create; with draft; }
 }
 
-define behavior for ZC_APG_GateHandle //alias <alias_name>
+define behavior for ZC_APG_GateHandle
 {
   use update;
   use delete;

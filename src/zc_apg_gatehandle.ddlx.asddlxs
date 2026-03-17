@@ -3,7 +3,7 @@
 annotate view ZC_APG_GateHandle with
 
 {
-  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_ClassVH', element: 'ClassName' } } ]
+ 
   @UI.facet: [ { id: 'idIdentification', type: #IDENTIFICATION_REFERENCE, label: 'Handler Details', position: 10 } ]
   @UI.identification: [ { position: 10 } ]
   @UI.lineItem: [ { position: 10 } ]
@@ -20,10 +20,10 @@ annotate view ZC_APG_GateHandle with
   @UI.selectionField: [ { position: 40 } ]
   Active;
 
-  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_ClassVH', element: 'ClassName' } } ]
   @UI.identification: [ { position: 40 } ]
   @UI.lineItem: [ { position: 40 } ]
   @UI.selectionField: [ { position: 40 } ]
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_APG_GATE_ACT_CLASS_VH', element: 'ActivationClass' } }]
   ActivationClass;
   
   @UI.hidden: true

@@ -30,13 +30,13 @@ interface ZIF_APG_CONTEXT
       !I_NAME type STRING
     returning
       value(R_VAL) type I
-    exceptions
+    raising
       ZCX_APG_ERROR .
   methods GET_DATE
     importing
       !I_NAME type STRING
     returning
       value(R_VAL) type XSDDATE_D
-    exceptions
+    raising
       ZCX_APG_ERROR .
 endinterface.

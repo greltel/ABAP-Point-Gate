@@ -42,6 +42,5 @@ define view entity ZR_APG_GateHandle
       @Semantics.systemDateTime.localInstanceLastChangedAt: true
       last_changed_at  as LastChangedAt,
 
-      /* Reached from Parent */
       _Point
 }

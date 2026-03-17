@@ -13,7 +13,6 @@ etag master LastChangedAt
   update;
   delete;
 
-  // Αυτές οι εντολές λύνουν τα σφάλματα "Edit", "Resume" και "Prepare"
   draft action Edit;
   draft action Activate optimized;
   draft action Discard;

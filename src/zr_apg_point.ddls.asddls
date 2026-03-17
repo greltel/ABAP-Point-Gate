@@ -29,5 +29,5 @@ define root view entity ZR_APG_Point
       @Semantics.systemDateTime.localInstanceLastChangedAt: true
       last_changed_at  as LastChangedAt,
 
-      _Gates // Make association public
+      _Gates
 }

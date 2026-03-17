@@ -1,0 +1,7 @@
+{
+  "BASEINFO": {
+    "FROM": [
+      "ZAPG_GATE_HANDLE"
+    ]
+  }
+}
