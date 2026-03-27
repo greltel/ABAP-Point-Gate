@@ -10,7 +10,13 @@ define root view entity ZC_APG_Point
 
 {
   key PointId,
+
       Active,
+      ActiveCriticality,
+      SrcMainProg,
+      SrcInclude,
+      SrcLine,
+      PointTypeCode,
       ActivationClass,
       LastChangedAt,
       _Gates : redirected to composition child ZC_APG_GateHandle

@@ -1,33 +1,60 @@
 @Metadata.layer: #CUSTOMER
-annotate view ZC_APG_Point with 
+
+@UI.headerInfo: { typeName: 'Point',
+                  typeNamePlural: 'Points',
+                  title: { type: #STANDARD, value: 'PointId' },
+                  description: { type: #STANDARD, value: 'ActivationClass' } }
+
+annotate view ZC_APG_Point with
 {
   @UI.facet: [ 
-      { id: 'idIdentification', type: #IDENTIFICATION_REFERENCE, label: 'Point Details', position: 10 },
-      { id: 'idGates', type: #LINEITEM_REFERENCE, label: 'Handlers', position: 20, targetElement: '_Gates' } 
+               
+    { id:              'idIdentification', 
+      type:            #IDENTIFICATION_REFERENCE, 
+      label:           'Point Details', 
+      position:        20 },
+               
+    { id:              'idGates',
+      type:            #LINEITEM_REFERENCE,
+      label:           'Handlers',
+      position:        30,
+      targetElement:   '_Gates' } 
   ]
 
-  @UI: { 
-      lineItem:       [ { position: 10 } ], 
-      identification: [ { position: 10 } ], 
-      selectionField: [ { position: 10 } ] 
-  }
+  
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_POINT_VH', element: 'PointId' } } ]
+  @UI.identification: [ { position: 10 } ]
+  @UI.lineItem: [ { position: 10 } ]
+  @UI.selectionField: [ { position: 10 } ]
   PointId;
 
-  @UI: { 
-      lineItem:       [ { position: 20 } ], 
-      identification: [ { position: 20 } ] ,
-      selectionField: [ { position: 20 } ] 
-  }
+  // Προσθέσαμε το @UI.dataPoint για να εμφανίζεται στο Header Facet
+  @UI.dataPoint: { title: 'Activation Status', criticality: 'ActiveCriticality' }
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_STATUS_VH', element: 'StatusCode' } } ]
+  @UI.identification: [ { position: 20, criticality: 'ActiveCriticality' } ]
+  @UI.lineItem: [ { position: 20, criticality: 'ActiveCriticality', criticalityRepresentation: #ONLY_ICON } ]
+  @UI.selectionField: [ { position: 20 } ]
+  @UI.textArrangement: #TEXT_ONLY
   Active;
 
-  @UI: { 
-      lineItem:       [ { position: 30 } ], 
-      identification: [ { position: 30 } ],
-      selectionField: [ { position: 30 } ] 
-  }
-  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_APG_POINT_ACT_CLASS_VH', element: 'ActivationClass' } }]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_POINT_ACT_CLASS_VH', element: 'ActivationClass' } } ]
+  @UI.identification: [ { position: 30 } ]
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.selectionField: [ { position: 30 } ]
   ActivationClass;
   
+  @UI.identification: [ { position: 40, label: 'Main Program' } ]
+  SrcMainProg;
+
+  @UI.identification: [ { position: 50, label: 'Include' } ]
+  SrcInclude;
+
+  @UI.identification: [ { position: 60, label: 'Line Number' } ]
+  SrcLine;
+
+  @UI.identification: [ { position: 70, label: 'Point Type' } ]
+  PointTypeCode;
+
   @UI.hidden: true
   LastChangedAt;
 }

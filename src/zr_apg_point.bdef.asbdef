@@ -17,7 +17,10 @@ etag master LastChangedAt
   draft action Activate optimized;
   draft action Discard;
   draft action Resume;
-  draft determine action Prepare;
+  draft determine action Prepare
+  {
+    validation Gate~validateHandlerClass;
+  }
 
   association _Gates { create; with draft; }
 
@@ -28,6 +31,10 @@ etag master LastChangedAt
       PointId         = point_id;
       Active          = active;
       ActivationClass = activation_class;
+      SrcMainProg     = src_main_prog;
+      SrcInclude      = src_include;
+      SrcLine         = src_line;
+      PointTypeCode   = point_type;
       CreatedAt       = created_at;
       CreatedBy       = created_by;
       LastChangedAt   = last_changed_at;
@@ -45,9 +52,12 @@ etag master LastChangedAt
   update;
   delete;
 
+  validation validateHandlerClass on save { field HandlerClass; create; update; }
+
   association _Point { with draft; }
 
-  field ( readonly ) PointId, CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, HandlerClass, SeqNo;
+  field ( readonly ) PointId, CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
+  field ( mandatory : create, readonly : update ) HandlerClass, SeqNo;
 
   mapping for zapg_gate_handle
     {
