@@ -28,6 +28,7 @@ ABAP Point Gate is a configuration-driven framework designed to decouple custom 
 
 * SAP S/4HANA 2021 (or higher) OR SAP BTP ABAP Environment.
 * XCO library availability
+* [Statement Compatibility](https://abaplint.app/stats/greltel/abap-point-gate/statement_compatibility)
 
 ## License
 This project is licensed under the [MIT License](https://github.com/greltel/ABAP-Point-Gate/blob/main/LICENSE).
