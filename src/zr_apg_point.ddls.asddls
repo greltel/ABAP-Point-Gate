@@ -13,7 +13,9 @@ define root view entity ZR_APG_Point
       @Search.defaultSearchElement: true
       @Search.fuzzinessThreshold: 0.8
   key point_id         as PointId,
-
+      
+      description          as Description,
+      module_name          as ModuleName,
       active           as Active,
       src_main_prog    as SrcMainProg,
       src_include      as SrcInclude,

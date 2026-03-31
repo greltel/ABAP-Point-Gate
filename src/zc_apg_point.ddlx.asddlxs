@@ -14,13 +14,29 @@ annotate view ZC_APG_Point with
                  type: #LINEITEM_REFERENCE,
                  label: 'Handlers',
                  position: 30,
-                 targetElement: '_Gates' } ]
+                 targetElement: '_Gates' } ,
+
+    { id:              'idAdminData',
+      type:            #FIELDGROUP_REFERENCE,
+      label:           'Administrative Data',
+      targetQualifier: 'AdminData', // Το όνομα του γκρουπ
+      position:        40 }
+      ]
   @UI.identification: [ { position: 10 } ]
   @UI.lineItem: [ { position: 10 } ]
   @UI.selectionField: [ { position: 10 } ]
   PointId;
-
-  // Προσθέσαμε το @UI.dataPoint για να εμφανίζεται στο Header Facet
+  
+  @UI.identification: [ { position: 15, label: 'Description' } ]
+  @UI.lineItem: [ { position: 15, label: 'Description' } ] // Προαιρετικά: αν θες να φαίνεται και στον κεντρικό πίνακα
+  @UI.multiLineText: true // Κάνει το πεδίο μεγαλύτερο (κουτάκι) για πιο εύκολο γράψιμο
+  Description;
+  
+  @UI.identification: [ { position: 16, label: 'Module Name' } ]
+  @UI.lineItem: [ { position: 16, label: 'Module Name' } ] // Για να το βλέπεις και στον αρχικό πίνακα!
+  @UI.selectionField: [ { position: 16 } ]                 // Βάλτο και στα φίλτρα, θα σου χρειαστεί για αναζήτηση
+  ModuleName;
+  
   @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_STATUS_VH', element: 'StatusCode' } } ]
   @UI.dataPoint: { title: 'Activation Status', criticality: 'ActiveCriticality' }
   @UI.identification: [ { position: 20, criticality: 'ActiveCriticality' } ]
@@ -35,17 +51,17 @@ annotate view ZC_APG_Point with
   @UI.selectionField: [ { position: 30 } ]
   ActivationClass;
 
-  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_APG_MAINPROG_VH', element: 'SrcMainProg' } }]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_MAINPROG_VH', element: 'SrcMainProg' } } ]
   @EndUserText.label: 'Main Program'
-  @UI.lineItem: [ { position: 40, label: 'Main Program' } ]
   @UI.identification: [ { position: 40, label: 'Main Program' } ]
+  @UI.lineItem: [ { position: 40, label: 'Main Program' } ]
   @UI.selectionField: [ { position: 40 } ]
   SrcMainProg;
 
-  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_APG_INCLUDE_VH', element: 'SrcInclude' } }]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_INCLUDE_VH', element: 'SrcInclude' } } ]
   @EndUserText.label: 'Include'
   @UI.identification: [ { position: 50, label: 'Include' } ]
-  @UI.lineItem: [ { position: 50,label: 'Include' } ]
+  @UI.lineItem: [ { position: 50, label: 'Include' } ]
   @UI.selectionField: [ { position: 50 } ]
   SrcInclude;
 
@@ -55,13 +71,23 @@ annotate view ZC_APG_Point with
   @UI.selectionField: [ { position: 60 } ]
   SrcLine;
 
-  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_APG_POINT_TYPE_VH', element: 'point_type' } }]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZI_APG_POINT_TYPE_VH', element: 'point_type' } } ]
   @EndUserText.label: 'Point Type'
   @UI.identification: [ { position: 70, label: 'Point Type' } ]
   @UI.lineItem: [ { position: 70, label: 'Point Type' } ]
   @UI.selectionField: [ { position: 70 } ]
   PointTypeCode;
 
-  @UI.hidden: true
+
+  @UI.fieldGroup: [ { qualifier: 'AdminData', position: 10, label: 'Created By' } ]
+  CreatedBy;
+
+  @UI.fieldGroup: [ { qualifier: 'AdminData', position: 20, label: 'Created On' } ]
+  CreatedAt;
+
+  @UI.fieldGroup: [ { qualifier: 'AdminData', position: 30, label: 'Last Changed By' } ]
+  LastChangedBy;
+
+  @UI.fieldGroup: [ { qualifier: 'AdminData', position: 40, label: 'Last Changed On' } ]
   LastChangedAt;
 }
